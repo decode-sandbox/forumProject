@@ -1,29 +1,139 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %} Hello Qad! {% endblock %}</title>
+    <title>{% block title %} <base href="#" target="_blank"> {% endblock %}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
   </head>
   <body>
-  	<header>Crêpes bretonnes</header>
 	<nav>
 	{% block nav %}
-		<ul>
-		<li><a href="/">Accueil</a></li>
-		<li><a href="/blog/">Blog</a></li>
-		<li><a href="/contact/">Contact</a></li>
-		</ul>
+
+<header class="hero is-medium is-primary is-bold">
+<div class="hero-head">  
+  <nav class="navbar nav-container is-primary
+" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="https://bulma.io">
+      ForumDecodeSanbox
+    </a>
+
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+
+    </div>
+
+    <div class="navbar-end">
+
+      <a class="navbar-item">
+        Home
+      </a>
+
+      <a class="navbar-item">
+        Catégories
+      </a>
+
+
+      <div class="navbar-item has-dropdown is-hoverable ">
+        <a class="navbar-link is-primary">
+          Postes
+        </a>
+
+        <div class="navbar-dropdown">
+          <a class="navbar-item">
+            Ajouter un poste
+          </a>
+          <a class="navbar-item">
+            Voir mes postes
+          </a>
+          <a class="navbar-item">
+            Contact
+          </a>
+          <hr class="navbar-divider">
+          <a class="navbar-item">
+            Profil
+          </a>
+        </div>
+      </div>
+
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-primary is-medium">
+            <strong>Sign up</strong>
+          </a>
+          <a class="button is-light is-medium">
+            Log in
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</nav>
+
+<section >
+  <div class="hero-body">
+    <div class="container has-text-centered"">
+      
+          <div>
+            <p class="title">
+              BIENVENUE SUR NOTRE FORUM
+            </p>
+            <p class="subtitle">
+              Un super forum ou tu pourra rire, pleurer, quemander bref le fun total oufzer quoi
+            </p>
+          
+          </div>
+
+          <br>
+              <div class="field ">
+                <div class="control has-icons-right">
+                  <input class="input is-large" type="text" placeholder="Entrez un mot clé">
+                  <span class="icon is-large is-right">
+                    <a href="#"> <i class="fas fa-search"></i> </a>
+                  </span>
+
+                </div>
+                <!-- <p class="control">
+                  <a class="button is-large">
+                    Cancel
+                  </a>
+                </p> -->
+        </div>
+            
+
+
+
+
+    </div>
+  </div>
+</section>
+
+</header>
+
+
 	{% endblock %}
 	</nav>
   <section class="section">
     <div class="container">
-      {% block content %}{% endblock %}
+      {% block content %}
+
+      
+
+      {% endblock %}
 
     </div>
   </section>
+
   </body>
 </html>
