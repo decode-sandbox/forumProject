@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %} <base href="#" target="_blank"> {% endblock %}</title>
+    <title>{% block title %} base {% endblock %}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
 <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
   </head>
@@ -17,7 +17,7 @@
   <nav class="navbar nav-container is-primary
 " role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="https://bulma.io">
+    <a class="navbar-item" href="#">
       ForumDecodeSanbox
     </a>
 
@@ -83,7 +83,7 @@
 
 <section >
   <div class="hero-body">
-    <div class="container has-text-centered"">
+    <div class="container has-text-centered">
       
           <div>
             <p class="title">
@@ -128,7 +128,7 @@
     <div class="container">
       {% block content %}
 
-      
+        vos contenues
 
       {% endblock %}
 
