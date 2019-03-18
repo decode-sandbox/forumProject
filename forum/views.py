@@ -13,3 +13,6 @@ def base(request):
 
 def postesOfCategorie(request, catID):
 	return render('categories.html')
+
+def login(request):
+	return render(request,'forum/login.html')
