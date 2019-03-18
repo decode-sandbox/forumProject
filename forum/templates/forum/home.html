@@ -1,3 +1,140 @@
-<h1>Welcome to DecodeSandbox</h1>
-<h2>~Beta team~</h2>
-<p>This will be the homepage of our project</p>
+{% extends "base.html" %}
+{% block title %} Accueil {% endblock %}
+{% block content %}
+
+   <div class="container has-text-centered ">
+	   	<div class="columns">
+		   	<div class="column" >
+		   		<div class="card">
+		   			<div class="card-content">
+		   				 <div class="media">
+						      <div class="media-left">
+						        <figure class="image is-48x48">
+						          <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+						        </figure>
+						      </div>
+						      <div class="media-content">
+						        <p class="title is-4">CATEGORIES</p>
+						        <p class="subtitle is-4">18</p>
+						      </div>
+						    </div>
+
+		   			</div>
+		   		</div>
+		   	</div>
+		   	<div class="column" >
+		   		<div class="card">
+		   			<div class="card-content">
+		   				 <div class="media">
+						      <div class="media-left">
+						        <figure class="image is-48x48">
+						          <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+						        </figure>
+						      </div>
+						      <div class="media-content">
+						        <p class="title is-4">SUJETS</p>
+						        <p class="subtitle is-4">56</p>
+						      </div>
+						    </div>
+		   				
+		   			</div>
+		   		</div>
+		   	</div>
+		   	<div class="column" >
+		   		<div class="card">
+		   			<div class="card-content">
+		   				 <div class="media">
+						      <div class="media-left">
+						        <figure class="image is-48x48">
+						          <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+						        </figure>
+						      </div>
+						      <div class="media-content">
+						        <p class="title is-4">REPONSES</p>
+						        <p class="subtitle is-4">189</p>
+						      </div>
+						    </div>
+		   				
+		   			</div>
+		   		</div>
+		   	</div>
+	   </div>
+   </div>
+
+   <br><br>
+   <section>
+   <div class="container has-text-centered ">
+   	<div class="card">
+   	<table class="table is-fullwidth is-striped">
+	  <thead>
+	    <tr>
+	      <th><abbr title="Position">CATEGORIES</abbr></th>
+	      <th><abbr title="nbPoste">Nbr de poste</abbr></th>
+	      <th><abbr title="nbComment">Nbr de commentaire</abbr></th>
+	      <th><abbr title="date">Auteur</abbr></th>
+	      <th><abbr title="nbComment">Date</abbr></th>
+
+	    </tr>
+	  </thead>
+	</table>
+
+	</div>
+
+	<br><br>
+
+		{% for cat in cats %}
+
+	   	<table class="table is-fullwidth is-striped is-bordered is-hoverable">
+
+	   
+	  	<thead>
+		    <tr class="is-selected" style="height: 70px" >
+		      <th>
+		      	<abbr title="Position"> {{cat}} </abbr>
+		      	<button class="button" > <span class="icon" ><i class="" > +</i></span> </button>
+		      </th>
+		      <th><abbr title="nbPoste">36</abbr></th>
+		      <th><abbr title="nbComment">32</abbr></th>
+		      <th><abbr title="date">Auteur</abbr></th>
+		      <th><abbr title="nbComment">Date</abbr></th>
+
+		    </tr>
+	  </thead>
+
+	  <tbody>
+	  	{% for p in postes %}
+		    <tr style="height: 100px">
+		      <td>
+		      	<div class="media">
+						      <div class="media-left">
+						        <figure class="image is-48x48">
+						          <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+						        </figure>
+						      </div>
+						      <div class="media-content">
+						        <p class="title is-4"> {{p}} </p>
+						        <p class="subtitle is-6">debut de la description du postes</p>
+						      </div>
+						    </div>
+		      </td>
+		      <td>36</td>
+		      <td>32</td>
+		      <td>John Doe</td>
+		      <td>11 Septembre 2018</td>
+		     
+		  	</tr>
+		{% endfor %}
+
+	</tbody>
+
+  </table>
+
+{% endfor %}
+
+
+</div>
+
+</section>
+
+
+{% endblock %}
