@@ -16,6 +16,9 @@ def postesOfCategorie(request, catID):
 
 def login(request):
 	return render(request,'forum/login.html')
+<<<<<<< HEAD
 
 def register(request):
 	return render(request,'forum/register.html')
+=======
+>>>>>>> c471ecd9856d00c0963cd44e7d0dddac3b0b5401

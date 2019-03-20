@@ -20,5 +20,8 @@ urlpatterns = [
     path('',views.home),
     path('base',views.base),
     path('login',views.login),
+<<<<<<< HEAD
     path('register',views.register),
+=======
+>>>>>>> c471ecd9856d00c0963cd44e7d0dddac3b0b5401
 ]
