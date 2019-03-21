@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 {% block title %} Accueil {% endblock %}
+{% block style %}
+	 <style type="text/css">
+    .is-vertical-center {
+        display: flex;
+        align-items: center;
+      }
+  </style>
+{% endblock %}
+
 {% block content %}
 
    <div class="container has-text-centered ">
@@ -88,10 +97,10 @@
 
 	   
 	  	<thead>
-		    <tr class="is-selected" style="height: 70px" >
-		      <th>
+		    <tr class="is-selected " >
+		      <th class="is-vertical-center" >
 		      	<abbr title="Position"> {{cat}} </abbr>
-		      	<button class="button" > <span class="icon" ><i class="" > +</i></span> </button>
+		      	<a style="margin-left: 15px" class="button is-primary is-rounded is-outlined is-inverted" > <span class="icon" ><i class="" > + </i></span> </a>
 		      </th>
 		      <th><abbr title="nbPoste">36</abbr></th>
 		      <th><abbr title="nbComment">32</abbr></th>
@@ -103,9 +112,9 @@
 
 	  <tbody>
 	  	{% for p in postes %}
-		    <tr style="height: 100px">
+		    <tr >
 		      <td>
-		      	<div class="media">
+		      	<div class="media is-vertical-center" style="height: 100px">
 						      <div class="media-left">
 						        <figure class="image is-48x48">
 						          <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
@@ -128,6 +137,7 @@
 	</tbody>
 
   </table>
+  <a class="button is-primary is-rounded is-outlined" style="margin-bottom: 12px">Voir plus de {{cat}} >> </a>
 
 {% endfor %}
 
