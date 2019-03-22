@@ -9,7 +9,8 @@ class Like(models.Model):
 
 class User(models.Model):
 	"""This class is used to get all informations about the User"""
-	names = models.CharField(max_length=45)
+	name = models.CharField(max_length=45)
+	surname = models.CharField(max_length=45)
 	email = models.CharField(max_length=45)
 	login = models.CharField(max_length=45)
 	passwd = models.CharField(max_length=45)
