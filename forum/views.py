@@ -1,8 +1,7 @@
 from django.shortcuts import render
 
 def home(request):
-	postes = ['rouge', 'orange', 'jaune', 'vert', 'bleu', 'indigo',
-'violet']
+	postes = ['rouge', 'orange', 'jaune']
 	cats = ['TECHNO', 'POLITIQUE', 'GAMING', 'DROLE', 'BRICOLAGE', 'DEV']
 
 	return render(request,'forum/home.html', locals())
