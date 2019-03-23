@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Création de compte</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bulma.css' %}">
+  <meta charset="utf-8">
+</head>
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+<body>
+  <div class="hero is-fullwidth ">
+    <div class="columns">
+      <div class="column is-4 is-offset-4">
+      <h3 class="title has-text-black-bis">Créer un compte</h3>
+        <div class="field">
+          <!-- <label class="label is-large">Nom</label> -->
+          <div class="control">
+            <input class="input is-large" type="text" placeholder="Entrez votre nom">
+          </div>
+        </div>
+
+        <div class="field">
+          <!-- <label class="label is-large ">Prénoms</label> -->
+          <div class="control">
+            <input class="input is-large" type="text" placeholder="Entrez vos prénoms">
+          </div>
+        </div>
+
+        <div class="field">
+          <!-- <label class="label is-large">Pseudo</label> -->
+          <div class="control has-icons-left has-icons-right">
+            <input class="input  is-large" type="text" placeholder="Votre pseudo" value="">
+            <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+            </span>
+            <span class="icon is-small is-right">
+              <i class="fas fa-check"></i>
+            </span>
+          </div>
+         <!--  <p class="help is-success">This username is available</p> -->
+        </div>
+
+        <div class="field">
+          <!-- <label class="label is-large">Email</label> -->
+          <div class="control has-icons-left has-icons-right">
+            <input class="input  is-large" type="email" placeholder="Entrer votre mail" value=""> 
+            <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+            <span class="icon is-small is-right">
+              <i class="fas fa-exclamation-triangle"></i>
+            </span>
+          </div>
+          <!-- <p class="help is-danger">Ce mail est in valide</p> -->
+        </div>
+
+        <div class="field">
+          <p class="control has-icons-left">
+            <input class="input is-large" type="password" placeholder="Mot de passe">
+            <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+            </span>
+          </p>
+      </div>
+
+      <div class="field">
+          <p class="control has-icons-left">
+            <input class="input is-large" type="password" placeholder=" Confirmer mot de passe ">
+            <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+            </span>
+          </p>
+      </div>
+
+        <div class="file">
+            <label class="file-label">
+              <input class="file-input" type="file" name="resume">
+              <span class="file-cta">
+                  <span class="file-icon">
+                    <i class="fas fa-upload"></i>
+                  </span>
+                  <span class="file-label">
+                    Choisir photo
+                  </span>
+              </span>
+            </label>
+        </div>
+
+
+        <div class="control">
+          <button class="button is-link is-large is-fullwidth is-success is-outlined">Envoyer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

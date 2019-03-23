@@ -18,6 +18,8 @@ from . import views
 
 urlpatterns = [
     path('',views.home),
+    path('login',views.login),
+    path('register',views.register),
     path('Poste',views.Poste),
     path('coP',views.coP),
     path('comment',views.comment),

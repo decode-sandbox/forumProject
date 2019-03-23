@@ -6,6 +6,11 @@ def home(request):
 
 	return render(request,'forum/home.html', locals())
 
+def login(request):
+	return render(request,'forum/login.html')
+
+def register(request):
+	return render(request,'forum/register.html')
 
 def postesOfCategorie(request, catID):
 	return render('categories.html')

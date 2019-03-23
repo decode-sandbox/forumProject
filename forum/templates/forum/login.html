@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Connexion</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bulma.css' %}">
+  <meta charset="utf-8">
+</head>
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+<body>
+  <div class="hero is-fullwidth">
+    <div class="container has-text-centered">
+
+      <div class="column is-4 is-offset-4">
+        <h3 class="title has-text-grey">Connexion</h3>
+        <p class="subtitle has-text-grey">Connectez vous pour poster un message.</p>
+        <div class="field" >
+          <p class="control has-icons-left has-icons-right">
+            <input class="input is-large" type="email" placeholder="Email">
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+              <span class="icon is-small is-right">
+                <i class="fas fa-check"></i>
+              </span>
+          </p>
+        </div>
+
+      <div class="field">
+          <p class="control has-icons-left">
+            <input class="input is-large" type="password" placeholder="Password">
+            <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+            </span>
+          </p>
+      </div>
+
+      <div class="field">
+                <label class="checkbox">
+                    <input type="checkbox">
+                   Se souvenir de moi
+                </label>
+            </div>
+
+      <div class="field">
+          <p class="control">
+            <button class="button is-link is-large is-fullwidth is-success is-outlined">
+               Envoyer
+            </button>
+          </p>
+      </div>
+
+      <p class="has-text-black">
+                <a href="../">Créer un compte</a> &nbsp;·&nbsp;
+                <a href="../">Mot de passe oublié</a> &nbsp;·&nbsp;
+                <!-- <a href="../">Need Help?</a> -->
+            </p>
+
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
