@@ -13,8 +13,8 @@ def postesOfCategorie(request, catID):
 def Poste(request):
         return render(request,'forum/Poste.html')
 
-def coP1(request):
-        return render(request,'forum/coP1.html')
+def coP(request):
+        return render(request,'forum/coP.html')
 
 def comment(request):
         return render(request,'forum/comment.html')
