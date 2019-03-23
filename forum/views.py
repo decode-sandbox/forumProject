@@ -14,7 +14,7 @@ def Poste(request):
         return render(request,'forum/Poste.html')
 
 def coP(request):
-        return render(request,'forum/coP.HTML')
+        return render(request,'forum/coP.html')
 
 def comment(request):
         return render(request,'forum/comment.html')
