@@ -9,6 +9,18 @@
 <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css">
+
+ {% block style %}
+ <style type="text/css">
+    .is-vertical-center {
+        display: flex;
+        align-items: center;
+        border: 2px solid red; 
+      }
+      
+  </style>
+  {% endblock %}
+
   </head>
   <body>
 	<nav>
@@ -45,14 +57,13 @@
         Catégories
       </a>
 
-
       <div class="navbar-item has-dropdown is-hoverable ">
         <a class="navbar-link is-primary">
           Postes
         </a>
 
         <div class="navbar-dropdown">
-          <a class="navbar-item">
+          <a class="navbar-item ">
             Ajouter un poste
           </a>
           <a class="navbar-item">
@@ -106,12 +117,10 @@
                   </span>
 
                 </div>
-                <!-- <p class="control">
-                  <a class="button is-large">
-                    Cancel
-                  </a>
-                </p> -->
-        </div>
+              </div>
+
+              <a class="button is-large is-primary is-outlined is-inverted">Créer un sujet</a>
+
             
 
 
@@ -127,7 +136,7 @@
 	{% endblock %}
 	</nav>
   <section class="section">
-    <div class="container">
+    <div class="container ">
       {% block content %}
 
         vos contenues
@@ -136,6 +145,61 @@
 
     </div>
   </section>
+
+  <footer class="footer" >
+    <div class="container">
+      <div class="columns">
+        <div class="column">
+          <div> © 2019 decodeSdbForum.com</div>
+          <div> made by team Beta </div>
+          <div> @decode Sandbox Bénin</div>
+
+        </div>
+        
+        <div class="column">
+         <aside class="menu">
+            <p class="menu-label">
+              Administration
+            </p>
+            <ul class="menu-list">
+                  <li><a>Conditions générales d'utilisation</a></li>
+                  <li><a>Politique de confidentialité des données personelles</a></li>
+                  <li><a>Aide et F.A.Q</a></li>
+                  <li><a>Nous contacter</a></li>
+
+
+            </ul>
+          </aside>
+        </div>
+        <div class="column">
+          <p class="buttons">
+            <a class="button is-large is-rounded">
+              <span class="icon is-medium">
+                <i class="fab fa-facebook"></i>
+              </span>
+            </a>
+            <a class="button is-large is-rounded">
+              <span class="icon is-medium">
+                <i class="fab fa-github"></i>
+
+              </span>
+            </a>
+            <a class="button is-large is-rounded">
+              <span class="icon is-medium">
+                <i class="fab fa-twitter"></i>  
+              </span>
+            </a>
+            <a class="button is-large is-rounded">
+              <span class="icon is-medium">
+                <i class="fab fa-slack"></i>
+              </span>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+     
+  </footer>
 
   </body>
 </html>
