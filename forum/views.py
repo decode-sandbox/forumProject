@@ -6,9 +6,15 @@ def home(request):
 
 	return render(request,'forum/home.html', locals())
 
-def base(request):
-	
-	return render(request, 'base.html')
 
 def postesOfCategorie(request, catID):
 	return render('categories.html')
+
+def Poste(request):
+        return render(request,'forum/Poste.html')
+
+def coP(request):
+        return render(request,'forum/coP.HTML')
+
+def comment(request):
+        return render(request,'forum/comment.html')

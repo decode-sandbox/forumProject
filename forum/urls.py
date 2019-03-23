@@ -18,5 +18,7 @@ from . import views
 
 urlpatterns = [
     path('',views.home),
-    path('base',views.base),
+    path('Poste',views.login),
+    path('coP',views.coP),
+    path('comment',views.comment),
 ]
