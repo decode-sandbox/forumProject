@@ -91,7 +91,7 @@
 
 	<br><br>
 
-		{% for cat in cats %}
+		{% for cat in categories %}
 
 	   	<table class="table is-fullwidth is-striped is-bordered is-hoverable">
 
@@ -99,7 +99,7 @@
 	  	<thead>
 		    <tr class="is-selected " >
 		      <th class="is-vertical-center" >
-		      	<abbr title="Position"> {{cat}} </abbr>
+		      	<abbr title="Position"> {{cat.label}} </abbr>
 		      	<a style="margin-left: 15px" class="button is-primary is-rounded is-outlined is-inverted" > <span class="icon" ><i class="" > + </i></span> </a>
 		      </th>
 		      <th><abbr title="nbPoste">36</abbr></th>
@@ -111,9 +111,9 @@
 	  </thead>
 
 	  <tbody>
-	  	{% for p in postes %}
+	  	{% for p in cat.postes %}
 		    <tr >
-		      <td>
+		      <td style="width: 45%">
 		      	<div class="media is-vertical-center" style="height: 100px">
 						      <div class="media-left">
 						        <figure class="image is-48x48">
@@ -121,15 +121,15 @@
 						        </figure>
 						      </div>
 						      <div class="media-content">
-						        <p class="title is-4"> {{p}} </p>
-						        <p class="subtitle is-6">debut de la description du postes</p>
+						        <p class="title is-4"> {{p.title}} </p>
+						        <p class="subtitle is-6"> {{p.description}} </p>
 						      </div>
 						    </div>
 		      </td>
 		      <td>36</td>
 		      <td>32</td>
-		      <td>John Doe</td>
-		      <td>11 Septembre 2018</td>
+		      <td> {{p.user.login}} </td>
+		      <td> {{p.crud_date}} </td>
 		     
 		  	</tr>
 		{% endfor %}
@@ -137,7 +137,7 @@
 	</tbody>
 
   </table>
-  <a class="button is-primary is-rounded is-outlined" style="margin-bottom: 12px">Voir plus de {{cat}} >> </a>
+  <a class="button is-primary is-rounded is-outlined" style="margin-bottom: 12px">Voir plus de {{cat.label}} >> </a>
 
 {% endfor %}
 

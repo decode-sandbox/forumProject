@@ -1,8 +1,28 @@
 from django.shortcuts import render
+from forum.models import Categorie
+
 
 def home(request):
-	postes = ['rouge', 'orange', 'jaune']
-	cats = ['TECHNO', 'POLITIQUE', 'GAMING', 'DROLE', 'BRICOLAGE', 'DEV']
+
+	categorie = {
+		'label' : "",
+		'postes' : []
+	}
+	
+	cats = Categorie.objects.all()
+
+	postes_of_categorie = []
+	categories = []
+
+	for cat in cats:
+		#postes_of_categorie.append(cat.post_set.all())
+
+		categorie = {
+			'label' : cat.label,
+			'postes' : cat.post_set.all() 
+			}
+		categories.append(categorie)
+
 
 	return render(request,'forum/home.html', locals())
 
