@@ -12,12 +12,14 @@
   <div class="hero is-fullwidth">
     <div class="container has-text-centered">
 
-      <div class="column is-4 is-offset-4">
+      <form method="post" action="">
+        {% csrf_token %}
+        <div class="column is-4 is-offset-4">
         <h3 class="title has-text-grey">Connexion</h3>
         <p class="subtitle has-text-grey">Connectez vous pour poster un message.</p>
         <div class="field" >
           <p class="control has-icons-left has-icons-right">
-            <input class="input is-large" type="email" placeholder="Email">
+            <input class="input is-large" type="text" placeholder="Nom d'utilisateur" name="name" >
               <span class="icon is-small is-left">
                 <i class="fas fa-envelope"></i>
               </span>
@@ -29,19 +31,24 @@
 
       <div class="field">
           <p class="control has-icons-left">
-            <input class="input is-large" type="password" placeholder="Password">
+            <input class="input is-large" type="password" placeholder="Password" name="paswrd">
             <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
             </span>
           </p>
       </div>
 
+       {% if error %}
+        <p class="help is-danger">Votre nom d'utilisateur ou mot de passe est incorrect</p>
+        <br>
+        {% endif %}
+
       <div class="field">
-                <label class="checkbox">
-                    <input type="checkbox">
-                   Se souvenir de moi
-                </label>
-            </div>
+          <label class="checkbox">
+              <input type="checkbox">
+               Se souvenir de moi
+          </label>
+      </div>
 
       <div class="field">
           <p class="control">
@@ -59,6 +66,7 @@
 
       </div>
 
+      </form>
     </div>
   </div>
 </body>
