@@ -1,5 +1,13 @@
-from django.shortcuts import render
 from forum.models import Categorie
+from forum.models import User
+from django.contrib.auth.models import User as AuthUser
+from django.shortcuts import render, redirect
+# from django.core.paginator import Paginator
+from django.contrib.auth import authenticate,logout
+from django.contrib.auth import login as new_login
+from django.contrib.auth.decorators import login_required
+from django.db import IntegrityError
+
 
 
 def home(request):
@@ -30,8 +38,30 @@ def login(request):
 	return render(request,'forum/login.html')
 
 def register(request):
-	return render(request,'forum/register.html')
+	if request.method == "POST":
+		form_values = request.POST.dict()
+		name = form_values['name']
+		names = form_values["names"]
+		email = form_values['email']
+		username = form_values['username']
+		paswrd = form_values['paswrd']
+		confirm_paswrd = form_values['confirm_paswrd']
+		profil = form_values['resume']
+		error = "Password don't match!"
+		if paswrd == confirm_paswrd:
+			try:
+				user = AuthUser.objects.create_user(username,email,paswrd)
+			except IntegrityError:
+				error = f"Username{username} already exist"
+			else:
+				User(user=user).save()
+				new_login(request,user)
+				return redirect(home)
+		return render(request, 'forum/register.html',{"error" : error} )
+	else:
+		return render(request, 'forum/register.html')
 
+	return render(request,'forum/register.html')
 def postesOfCategorie(request, catID):
 	return render('categories.html')
 

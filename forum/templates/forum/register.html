@@ -13,24 +13,26 @@
     <div class="columns">
       <div class="column is-4 is-offset-4">
       <h3 class="title has-text-black-bis">Créer un compte</h3>
-        <div class="field">
+        <form method="post" action="" >
+          {% csrf_token %}
+          <div class="field">
           <!-- <label class="label is-large">Nom</label> -->
           <div class="control">
-            <input class="input is-large" type="text" placeholder="Entrez votre nom">
+            <input class="input is-large" type="text" placeholder="Entrez votre nom" name="name">
           </div>
         </div>
 
         <div class="field">
           <!-- <label class="label is-large ">Prénoms</label> -->
           <div class="control">
-            <input class="input is-large" type="text" placeholder="Entrez vos prénoms">
+            <input class="input is-large" type="text" placeholder="Entrez vos prénoms" name="names">
           </div>
         </div>
 
         <div class="field">
           <!-- <label class="label is-large">Pseudo</label> -->
           <div class="control has-icons-left has-icons-right">
-            <input class="input  is-large" type="text" placeholder="Votre pseudo" value="">
+            <input class="input  is-large" type="text" placeholder="Votre pseudo" value="" name="username">
             <span class="icon is-small is-left">
               <i class="fas fa-user"></i>
             </span>
@@ -44,7 +46,7 @@
         <div class="field">
           <!-- <label class="label is-large">Email</label> -->
           <div class="control has-icons-left has-icons-right">
-            <input class="input  is-large" type="email" placeholder="Entrer votre mail" value=""> 
+            <input class="input  is-large" type="email" placeholder="Entrer votre mail" value="" name="email"> 
             <span class="icon is-small is-left">
               <i class="fas fa-envelope"></i>
             </span>
@@ -57,7 +59,7 @@
 
         <div class="field">
           <p class="control has-icons-left">
-            <input class="input is-large" type="password" placeholder="Mot de passe">
+            <input class="input is-large" type="password" placeholder="Mot de passe" name="paswrd">
             <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
             </span>
@@ -66,12 +68,17 @@
 
       <div class="field">
           <p class="control has-icons-left">
-            <input class="input is-large" type="password" placeholder=" Confirmer mot de passe ">
+            <input class="input is-large" type="password" placeholder=" Confirmer mot de passe " name="confirm_paswrd">
             <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
             </span>
           </p>
       </div>
+
+      {% if error %}
+        <p class="help is-danger">{{error}}</p>
+        <br>
+        {% endif %}
 
         <div class="file">
             <label class="file-label">
@@ -91,6 +98,7 @@
         <div class="control">
           <button class="button is-link is-large is-fullwidth is-success is-outlined">Envoyer</button>
         </div>
+        </form>
       </div>
     </div>
   </div>
