@@ -31,6 +31,7 @@
   </div>
 
 <center>
+{% for Poste in coP %}
   <div class="box" style="width: 500px;">
       <article class="media">
         <div class="media-left">
@@ -40,13 +41,15 @@
         </div>
         <div class="media-content">
           <div class="content">
+          
             <p>
                 
-              <strong>John Doe</strong> <small>@johndoe</small> <small>11 Mars</small>
+              <strong>{{names }}</strong> <small>@johndoe</small> <small>11 Mars</small>
               <br>
-              C'est celui qui dit qui est.
-              Rien de vénal, de vil ou de vaniteux, mais plutot une oeuvre vital de vertue, de bravoure et de virtuosité au nom de la véracité
-              l'espoir est une déception encore inexploré.
+              {{title }}
+              {{ description}}
+              {{ MEDIA_URL }}{{photo }}
+              {{ date}}
               
             </p>
           </div>
@@ -72,6 +75,7 @@
         </div>
       </article>
     </div>
+    {% endfor %}
 </center>
 
 {% endblock %}

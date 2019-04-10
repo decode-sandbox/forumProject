@@ -16,6 +16,9 @@ Including another URLconf
 from django.urls import path
 from . import views
 
+url(r'^Poste/$', 'Poste'),
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 urlpatterns = [
     path('',views.home),
     path('Poste',views.Poste),

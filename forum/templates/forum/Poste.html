@@ -28,14 +28,16 @@
     </ul>
   </div>
 
+
+<form method="post" enctype="multipart/form-data">  
 <div class="field is-horizontal">
       <div class="field-label is-medium">
-        <label class="label">Titre du Poste</label>
+        <label class="label" for="id_title">Titre du Poste</label>
       </div>
       <div class="field-body">
         <div class="field">
           <div class="control">
-            <input class="input " type="text" placeholder="Title of poste" style="width: 500px;">
+            <input class="input " type="text" name="title" placeholder="Title of poste" style="width: 500px;" id="id_title" required="">
           </div>
         </div>
       </div>
@@ -43,12 +45,12 @@
     <br>
     <div class="field is-horizontal ">
       <div class="field-label is-large" >
-        <label class="label">Poste</label>
+        <label class="label" for="id_description" >Poste</label>
       </div>
       <div class="field-body" >
         <div class="field">
           <div class="control">
-            <textarea class="textarea" placeholder="Contenues" style="height: 300px;"></textarea>
+            <textarea class="textarea" type="text" name="description" placeholder="Contenues" style="height: 300px;" id="id_description" required=""></textarea>
           </div>
         </div>
       </div>
@@ -57,17 +59,65 @@
 
     <div class="field is-horizontal">
       <div class="field-label is-medium">
-        <label class="label">Date de publication</label>
+        <label class="label" for="id_date">Date de modification</label>
       </div>
       <div class="field-body">
         <div class="field">
           <div class="control">
-            <input class="input" type="date" placeholder="date" style="width: 170px;">
+            <input class="input" type="date" name="date" placeholder="date" style="width: 170px;" id="id_date" required="">
           </div>
         </div>
       </div>
     </div>
   
+<br>
+
+      <div class="field is-horizontal">
+        <div class="field-label is-medium">
+          <label class="label" >Catégories</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <ul> 
+              <li>
+        
+        <label class="checkbox box" for="id_categorie">
+        <input type="checkbox" name="categorie" id="id_categorie">
+        Food & Drink
+        </label>
+      
+  
+        <label class="checkbox box" for="id_categorie">
+        <input type="checkbox" name="categorie" id="id_categorie">
+        Lifestyle
+        </label>
+
+        <label class="checkbox box" for="id_categorie">
+        <input type="checkbox" name="categorie" id="id_categorie">
+        Technology
+        </label>
+
+        <label class="checkbox box" for="id_categorie">
+        <input type="checkbox" name="categorie" id="id_categorie">
+        Travel
+        </label>
+
+        <label class="checkbox box" for="id_categorie">
+        <input type="checkbox" name="categorie" id="id_categorie">
+        TV & Movies
+        </label>
+
+        <label class="checkbox box" for="id_categorie">
+        <input type="checkbox" name="categorie" id="id_categorie">
+        Uncategorized
+        </label>
+
+           </li>
+      </ul>
+      </div>
+          </div>
+        </div>
+
     <div class="file has-name is-centered">
   <label class="file-label">
   <input class="file-input" type="file" name="resume">
@@ -99,5 +149,5 @@
         </div>
       </div>
     </div>
-
+</form>
 {% endblock %}
