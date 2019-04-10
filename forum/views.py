@@ -80,7 +80,7 @@ def postesOfCategorie(request, catID):
 @login_required(login_url='/forum/login')
 def Poste(request):
         return render(request,'forum/Poste.html')
-
+@login_required(login_url='/forum/login')
 def coP(request):
         return render(request,'forum/cop.html')
 
