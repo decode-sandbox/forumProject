@@ -31,6 +31,7 @@
   </div>
 
 <center>
+    {% for p in user_post %}
   <div class="box" style="width: 500px;">
       <article class="media">
         <div class="media-left">
@@ -42,11 +43,9 @@
           <div class="content">
             <p>
                 
-              <strong>John Doe</strong> <small>@johndoe</small> <small>11 Mars</small>
+              <strong> {{p.user.user.firts_name}} {{p.user.user.last_name}}</strong> <small>{{p.user}}</small> <small>{{p.crud_date}}</small>
               <br>
-              C'est celui qui dit qui est.
-              Rien de vénal, de vil ou de vaniteux, mais plutot une oeuvre vital de vertue, de bravoure et de virtuosité au nom de la véracité
-              l'espoir est une déception encore inexploré.
+              {{p.description}}
               
             </p>
           </div>
@@ -72,6 +71,8 @@
         </div>
       </article>
     </div>
+    {% endfor %}
+
 </center>
 
 {% endblock %}
