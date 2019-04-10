@@ -1,4 +1,6 @@
 from forum.models import Categorie
+from forum.models import Post
+
 from forum.models import User
 from django.contrib.auth.models import User as AuthUser
 from django.shortcuts import render, redirect
@@ -7,8 +9,12 @@ from django.contrib.auth import authenticate,logout
 from django.contrib.auth import login as new_login
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
+from django.template.context_processors import csrf
+from django.http import HttpResponse
 
 
+
+the_user=User()
 
 def home(request):
 
@@ -20,7 +26,9 @@ def home(request):
 	cats = Categorie.objects.all()
 
 	postes_of_categorie = []
-	categories = []
+	categories = []			
+
+	# return HttpResponse("Salut, {0} !".format(request.user.username))
 
 	for cat in cats:
 		#postes_of_categorie.append(cat.post_set.all())
@@ -31,6 +39,17 @@ def home(request):
 			}
 		categories.append(categorie)
 
+	
+	poste_no_cat=[]
+	for p in Post.objects.all():
+		if p.categorie is None:
+			poste_no_cat.append(p)
+
+	categorie = {
+			'label' : "Autre",
+			'postes' : poste_no_cat
+			}
+	categories.append(categorie)
 
 	return render(request,'forum/home.html', locals())
 
@@ -40,7 +59,9 @@ def login(request):
 		username = form_fields["name"]
 		paswrd = form_fields["paswrd"]
 		user = authenticate(username=username,password=paswrd)
+		the_user = user
 		if user:
+			the_user = user
 			new_login(request,user)
 			return redirect(home)
 		else:
@@ -52,8 +73,8 @@ def login(request):
 def register(request):
 	if request.method == "POST":
 		form_values = request.POST.dict()
-		name = form_values['name']
-		names = form_values["names"]
+		name = form_values['name']#nom
+		names = form_values["names"]#prenom
 		email = form_values['email']
 		username = form_values['username']
 		paswrd = form_values['paswrd']
@@ -62,7 +83,7 @@ def register(request):
 		error = "Password don't match!"
 		if paswrd == confirm_paswrd:
 			try:
-				user = AuthUser.objects.create_user(username,email,paswrd)
+				user = AuthUser.objects.create_user(username=username,email=email,password=paswrd,first_name=names,last_name=name)
 			except IntegrityError:
 				error = f"Username{username} already exist"
 			else:
@@ -79,10 +100,35 @@ def postesOfCategorie(request, catID):
 
 @login_required(login_url='/forum/login')
 def Poste(request):
-        return render(request,'forum/Poste.html')
+
+	if request.method == "POST":
+		form_values = request.POST.dict()
+		title = form_values['title']
+		description = form_values["description"]
+		#paylaod = form_values['paylaod']
+
+		#the_user.save()
+		user=User.objects.get(user__username=request.user.username)
+		# return HttpResponse("hi, {0} !".format(user))
+		post = Post.objects.create(title=title, description=description, user=user)
+		post.save()
+		error = ""
+		#return render(request,'forum/cop.html')
+		return redirect(coP)
+
+	else:
+		return render(request,'forum/Poste.html')
+
+	return render(request,'forum/Poste.html')
+
 @login_required(login_url='/forum/login')
 def coP(request):
-        return render(request,'forum/cop.html')
+	user_post=[]
+	user=User.objects.get(user__username=request.user.username)
+	for post in Post.objects.filter(user=user):
+		user_post.append(post)
+	
+	return render(request,'forum/cop.html',locals())
 
 @login_required(login_url='/forum/login')
 def comment(request):
