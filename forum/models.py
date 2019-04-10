@@ -1,20 +1,22 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User as AuthUser
 
 
 
 class User(models.Model):
 	"""This class is used to get all informations about the User"""
-	name = models.CharField(max_length=45)
-	surname = models.CharField(max_length=45)
-	email = models.CharField(max_length=45)
-	login = models.CharField(max_length=45)
-	passwd = models.CharField(max_length=45)
-	inscription_date = models.DateTimeField(default=timezone.now,verbose_name="Date d'inscription")
-	photo = models.CharField(max_length=200, null=True)
+	user = models.OneToOneField(AuthUser, on_delete=models.CASCADE)
+	# name = models.CharField(max_length=45)
+	# surname = models.CharField(max_length=45)
+	# email = models.CharField(max_length=45)
+	# login = models.CharField(max_length=45)
+	# passwd = models.CharField(max_length=45)
+	# inscription_date = models.DateTimeField(default=timezone.now,verbose_name="Date d'inscription")
+	photo = models.ImageField(max_length=200, null=True)
 	
 	def __str__(self):
-		return self.login
+		return self.user.username
 
 class Post(models.Model):
 	"""docstring for post"""

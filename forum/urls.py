@@ -18,9 +18,9 @@ from . import views
 
 urlpatterns = [
     path('',views.home),
-    path('login',views.login),
-    path('register',views.register),
-    path('Poste',views.Poste),
-    path('coP',views.coP),
-    path('comment',views.comment),
+    path('login',views.login,name='login'),
+    path('register',views.register,name='register'),
+    path('Poste',views.Poste,name='poste'),
+    path('coP',views.coP,name='cop'),
+    path('comment',views.comment,name='comment'),
 ]
