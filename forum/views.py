@@ -102,11 +102,7 @@ def register(request):
 		return render(request, 'forum/register.html')
 
 	return render(request,'forum/register.html')
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> Ajout de logout
 def postesOfCategorie(request, catID):
 	return render('categories.html')
 
