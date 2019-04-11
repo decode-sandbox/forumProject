@@ -111,8 +111,10 @@
 	  </thead>
 
 	  <tbody>
-	  	{% for p in cat.postes %}
-		    <tr >
+			
+			{% for p in cat.postes %}
+			<a style="display: block" href=" {% url 'poste' %} ">
+		    <tr id="p.id" name="p.title"  >
 		      <td style="width: 45%">
 		      	<div class="media is-vertical-center" style="height: 100px">
 						      <div class="media-left">
@@ -121,17 +123,20 @@
 						        </figure>
 						      </div>
 						      <div class="media-content">
-						        <p class="title is-4"> {{p.title}} </p>
-						        <p class="subtitle is-6"> {{p.description}} </p>
+						        <p class="title is-4"> 	<a style="display: block" href=" {% url 'comment' p.id %} ">
+												{{p.title|truncatewords:15}} </a></p>
+										<p class="subtitle is-6"> {{p.description|truncatewords:10}} </p>
+										
 						      </div>
 						    </div>
 		      </td>
-		      <td>36</td>
+		      <td>{{p.id}} </td>
 		      <td>32</td>
 		      <td> {{p.user}} </td>
 		      <td> {{p.crud_date}} </td>
 		     
-		  	</tr>
+				</tr>
+			</a>
 		{% endfor %}
 
 	</tbody>

@@ -1,5 +1,5 @@
 from forum.models import Categorie
-from forum.models import Post
+from forum.models import Post, Comment, Like
 
 from forum.models import User
 from django.contrib.auth.models import User as AuthUser
@@ -131,5 +131,77 @@ def coP(request):
 	return render(request,'forum/cop.html',locals())
 
 @login_required(login_url='/forum/login')
-def comment(request):
-        return render(request,'forum/comment.html')
+def comment(request,id):
+	# return HttpResponse("id, {0} !".format(id))
+	post=Post.objects.get(id=id)
+	coms = post.comment_set.all()
+	coms_like=[]
+	post_like = post.like_set.all().count()
+
+	for c in coms:
+		com_like = {
+				'com' : c,
+				'like' : c.like_set.all().count()
+				}
+		coms_like.append(com_like)
+
+	if request.method == "POST":
+		form_values = request.POST.dict()
+		message = form_values["comment"]
+		#paylaod = form_values['paylaod']
+		
+		user=User.objects.get(user__username=request.user.username)
+		# return HttpResponse("hi, {0} !".format(user))
+		comme = Comment.objects.create(message=message,post=post, user=user)
+
+		return redirect(comment,id)
+
+	else:
+		return render(request,'forum/comment.html', locals())
+
+	return render(request,'forum/comment.html', locals())
+
+@login_required(login_url='/forum/login')
+def like(request,post_id,id,typ):
+	#return HttpResponse("id, {0} !".format(id))
+	user=User.objects.get(user__username=request.user.username)
+	if typ == "postt":
+		try:
+			l=Like.objects.get(user=user, poste=Post.objects.get(id=id))
+
+		except Like.DoesNotExist:
+			try:
+				Like.objects.create(poste=Post.objects.get(id=id), user=user)
+			except IntegrityError:
+				return HttpResponse("tyintegrytié")
+			else:
+				redirect(comment,post_id)
+
+		except MultipleObjectsReturned:
+				redirect(comment,post_id)
+		else:
+			return HttpResponse("vous avez deja liké ce post")
+			
+
+	elif typ == "commentt":
+		try:
+			l=Like.objects.get(user=user, comment=Comment.objects.get(id=id))
+
+		except Like.DoesNotExist:
+			try:
+				Like.objects.create(comment=Comment.objects.get(id=id), user=user)
+			except IntegrityError:
+				return HttpResponse("tyintegrytié")
+			else:
+				redirect(comment,post_id)
+
+		except MultipleObjectsReturned:
+				redirect(comment,post_id)
+		else:
+			return HttpResponse("vous avez deja liké ce commentaire")
+		
+		
+	else:
+		return HttpResponse("type error must be post or comment not .%s.." %(typ))
+	
+	return redirect(comment,post_id)
