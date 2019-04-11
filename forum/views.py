@@ -24,6 +24,9 @@ def home(request):
 	}
 	
 	cats = Categorie.objects.all()
+	nbCat=cats.count()+1
+	nbPost=Post.objects.all().count()
+	nbCom=Comment.objects.all().count()
 
 	postes_of_categorie = []
 	categories = []			
@@ -205,3 +208,32 @@ def like(request,post_id,id,typ):
 		return HttpResponse("type error must be post or comment not .%s.." %(typ))
 	
 	return redirect(comment,post_id)
+
+
+def edit_post(request, id):
+	post = Post.objects.get(id=id)
+
+	title=post.title
+	description=post.description
+	#form = JournalForm(initial={'title': title})
+
+	if request.method == "POST":
+		form_values = request.POST.dict()
+		title = form_values['title']
+		description = form_values["description"]
+		#paylaod = form_values['paylaod']
+
+		#the_user.save()
+		user=User.objects.get(user__username=request.user.username)
+		# return HttpResponse("hi, {0} !".format(user))
+		post.title=title
+		post.description=description
+		post.save()
+		error = ""
+		#return render(request,'forum/cop.html')
+		return redirect(coP)
+
+	else:
+		return render(request,'forum/edit_post.html', locals())
+
+	return render(request,'forum/edit_post.html', locals())

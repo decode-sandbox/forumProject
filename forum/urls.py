@@ -22,6 +22,7 @@ urlpatterns = [
     path('register',views.register,name='register'),
     path('Poste',views.Poste,name='poste'),
     path('coP',views.coP,name='cop'),
+    path('edit_post/<id>',views.edit_post,name='edit_post'),
     path('comment/<id>',views.comment,name='comment'),
     path('like/<post_id>/<id>/<typ>',views.like,name='like'),
 ]

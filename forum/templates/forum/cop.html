@@ -43,7 +43,7 @@
           <div class="content">
             <p >
                 
-              <strong> {{p.user.user.firts_name}} {{p.user.user.last_name}}</strong> <small>{{p.user}}</small> <small>{{p.crud_date}}</small>
+              <strong> @{{p.user}}</strong>  <small>{{p.crud_date}}</small>
               <br>
               {{p.description}}
               
@@ -56,12 +56,12 @@
                   <i class="fas fa-reply" aria-hidden="true"></i>
                 </span>
               </a>
-              <a class="level-item" aria-label="like" >
+              <a class="level-item" aria-label="like" href=" {% url 'edit_post' p.id %} ">
                 <span class="icon is-small">
-                  <i class="fas fa-thumbs-up " aria-hidden="true"></i>
+                  <i class="fas fa-edit"></i>
                 </span>
               </a>
-              <a class="level-item" aria-label="delete">
+              <a class="level-item" aria-label="delete"  >
                   <span class="icon is-small">
                     <i class="fas fa-trash " aria-hidden="true"></i>
                   </span>

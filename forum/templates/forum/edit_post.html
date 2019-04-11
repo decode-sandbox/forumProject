@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}Faire un poste{% endblock %}
+{% block content %}
+<section class="hero is-primary is-bold">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          Edition du poste
+        </h1>
+      </div>
+    </div>
+  </section>
+<br><br><br>
+<form method="POST" action="" >  
+    {% csrf_token %}
+
+<div class="field is-horizontal">
+      <div class="field-label is-medium">
+        <label class="label">Titre du poste</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <div class="control">
+            <input class="input " id="title" name="title" type="text" value="{{title}}" placeholder="Title of poste" style="width: 500px;">
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="field is-horizontal ">
+      <div class="field-label is-large" >
+        <label class="label">Description du poste</label>
+      </div>
+      <div class="field-body" >
+        <div class="field">
+          <div class="control">
+            <textarea id="description" name="description" class="textarea" placeholder="Contenues" style="height: 300px;">{{description}}</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <!-- <div class="field is-horizontal">
+      <div class="field-label is-medium">
+        <label class="label">Date de publication</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <div class="control">
+            <input class="input" type="date" placeholder="date" style="width: 170px;">
+          </div>
+        </div>
+      </div>
+    </div> -->
+  
+    <div class="file has-name is-centered">
+  <label class="file-label">
+  <input class="file-input" type="file" name="resume">
+  <span class="file-cta">
+    <span class="file-icon">
+      <i class="fas fa-upload"></i>
+    </span>
+    <span class="file-label">
+      Choississez votre fichier…
+    </span>
+  </span>
+  <span class="file-name">
+    
+  </span>
+  </label>
+  </div>
+   <br>
+    <div class="field is-horizontal">
+      <div class="field-label">
+        <!-- Left empty for spacing -->
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <div class="control">
+            <button class="button is-dark is-medium" type="submit" >
+              Mettre à jour
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+
+{% endblock %}
