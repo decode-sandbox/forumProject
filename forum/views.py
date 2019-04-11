@@ -53,6 +53,9 @@ def home(request):
 
 	return render(request,'forum/home.html', locals())
 
+def home1(request):
+	return render(request,'forum/home1.html')
+
 def login(request):
 	if request.method == "POST":
 		form_fields = request.POST.dict()
@@ -89,18 +92,18 @@ def register(request):
 			else:
 				User(user=user).save()
 				new_login(request,user)
-				return redirect(home)
+				return redirect(home1)
 		return render(request, 'forum/register.html',{"error" : error} )
 	else:
 		return render(request, 'forum/register.html')
 
 	return render(request,'forum/register.html')
+
 def postesOfCategorie(request, catID):
 	return render('categories.html')
 
 @login_required(login_url='/forum/login')
 def Poste(request):
-
 	if request.method == "POST":
 		form_values = request.POST.dict()
 		title = form_values['title']
@@ -132,4 +135,9 @@ def coP(request):
 
 @login_required(login_url='/forum/login')
 def comment(request):
-        return render(request,'forum/comment.html')
+    return render(request,'forum/comment.html')
+
+def Logout(request):
+	logout(request)
+	return redirect(login)
+

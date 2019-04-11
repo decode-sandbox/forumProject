@@ -56,7 +56,7 @@ class Comment(models.Model):
 
 	def __str__(self):
 		return self.title
-
+ 
 class Categorie(models.Model):
 	"""docstring for Categorie"""
 	label = models.CharField(max_length=45)

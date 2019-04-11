@@ -17,10 +17,12 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('',views.home),
+    path('',views.home,name='home'),
     path('login',views.login,name='login'),
     path('register',views.register,name='register'),
     path('Poste',views.Poste,name='poste'),
     path('coP',views.coP,name='cop'),
     path('comment',views.comment,name='comment'),
+    path('home1',views.home1,name='home1'),
+    path('logout',views.Logout,name='logout'),
 ]
