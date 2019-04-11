@@ -53,7 +53,7 @@
 
     <div class="navbar-end">
 
-      <a class="navbar-item">
+      <a href=" {%url 'home'%} " class="navbar-item">
         Home
       </a>
 
@@ -82,12 +82,25 @@
           </a>
         </div>
       </div>
+            {%if user.is_authenticated%}
+            <div class="navbar-end">
+                    <a href="#Account" class="navbar-item ">{{user.username}}<i class="fas fa-user-circle"></i></a>
+                    <div class="buttons">
+                        <a href=" {% url 'logout' %} " class="button is-danger">
+                            <strong>Logout</strong>
+                        </a>
+                    </div>
+            </div>
+            {%endif%}
 
+        
       <div class="navbar-item">
         <div class="buttons">
+          {%if not user.is_authenticated%}
           <a href="{%url 'register' %} " class="button is-primary is-medium">
             <strong>Sign up</strong>
           </a>
+        {%endif%}
           <a href="{%url 'login' %} " class="button is-light is-medium">
             Log in
           </a>
@@ -124,11 +137,6 @@
               </div>
 
               <a href=" {% url 'poste' %} " class="button is-large is-primary is-outlined is-inverted">Créer un sujet</a>
-
-            
-
-
-
 
     </div>
   </div>

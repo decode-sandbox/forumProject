@@ -53,14 +53,10 @@ class Comment(models.Model):
 		ordering = ['crud_date']
 
 	def __str__(self):
+
 		return self.message
-
-# class Commentaire(models.Model):
-# 	"""docstring for Categorie"""
-# 	message = models.CharField(max_length=45)
-# 	def __str__(self):
-# 		return self.message
-
+		
+ 
 class Categorie(models.Model):
 	"""docstring for Categorie"""
 	label = models.CharField(max_length=45)
