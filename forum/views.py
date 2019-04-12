@@ -210,30 +210,36 @@ def like(request,post_id,id,typ):
 	return redirect(comment,post_id)
 
 
-def edit_post(request, id):
+def edit_post(request, id, action):
 	post = Post.objects.get(id=id)
+	if action == "edit":
+		title=post.title
+		description=post.description
+		#form = JournalForm(initial={'title': title})
 
-	title=post.title
-	description=post.description
-	#form = JournalForm(initial={'title': title})
+		if request.method == "POST":
+			form_values = request.POST.dict()
+			title = form_values['title']
+			description = form_values["description"]
+			#paylaod = form_values['paylaod']
 
-	if request.method == "POST":
-		form_values = request.POST.dict()
-		title = form_values['title']
-		description = form_values["description"]
-		#paylaod = form_values['paylaod']
+			#the_user.save()
+			user=User.objects.get(user__username=request.user.username)
+			# return HttpResponse("hi, {0} !".format(user))
+			post.title=title
+			post.description=description
+			post.save()
+			error = ""
+			#return render(request,'forum/cop.html')
+			return redirect(coP)
 
-		#the_user.save()
-		user=User.objects.get(user__username=request.user.username)
-		# return HttpResponse("hi, {0} !".format(user))
-		post.title=title
-		post.description=description
-		post.save()
-		error = ""
-		#return render(request,'forum/cop.html')
-		return redirect(coP)
+		else:
+			return render(request,'forum/edit_post.html', locals())
 
-	else:
 		return render(request,'forum/edit_post.html', locals())
-
-	return render(request,'forum/edit_post.html', locals())
+		
+	elif action == "delete":
+		post.delete()
+		return redirect(coP)
+	else:
+		return HttpResponse("type error must be post or comment not .%s.." %(action))
