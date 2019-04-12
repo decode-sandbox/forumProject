@@ -1,5 +1,19 @@
 {% extends "base.html" %}
 {% block title %}Mes Postes{% endblock %}
+{% block script %}
+<script type="text/javascript">
+
+$("#showModal").click(function() {
+  $(".modal").addClass("is-active"); 
+  console.log("click") 
+});
+
+$(".modal-close").click(function() {
+   $(".modal").removeClass("is-active");
+});
+
+</script>
+{% endblock %}
 {% block content %}
 
 <section class="hero is-primary is-bold">
@@ -30,9 +44,29 @@
     </ul>
   </div>
 
+  
+
 <center>
     {% for p in user_post %}
-  <div class="box" style="width: 500px;">
+
+    <div class="modal" id="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Confirmer</p>
+            <button class="delete" aria-label="close"></button>
+          </header>
+          <section class="modal-card-body">
+            Êtes vous sur de vouloir supprimer cet poste ?
+          </section>
+          <footer class="modal-card-foot">
+            <a href=" {% url 'edit_post' p.id 'delete' %} "><button class="button is-success" id="modal_oui" onclick='document.getElementById("modal").classList.removeClass("is-active"); ' >Oui</button></a>
+            <a ><button class="button" id="modal_non" onclick='document.getElementById("modal").classList.removeClass("is-active"); ' >Annuler</button></a>
+          </footer>
+        </div>
+      </div>
+
+  <div class="box"  >
       <article class="media">
         <div class="media-left">
           <figure class="image is-64x64">
@@ -41,14 +75,17 @@
         </div>
         <div class="media-content">
           <div class="content">
-            <p>
-                
-              <strong> {{p.user.user.firts_name}} {{p.user.user.last_name}}</strong> <small>{{p.user}}</small> <small>{{p.crud_date}}</small>
-              <br>
+            <p >
+              <header class="card-header"><p class="card-header-title">
+                <a style="display: block" href=" {% url 'comment' p.id %} ">
+                  {{p.title}} </a>
+              </p></header>
               {{p.description}}
               
             </p>
           </div>
+          <i>{{p.crud_date}}</i>
+          <br><br>
           <nav class="level is-mobile">
             <div class="level-left">
               <a href="comment" class="level-item" aria-label="reply">
@@ -56,12 +93,12 @@
                   <i class="fas fa-reply" aria-hidden="true"></i>
                 </span>
               </a>
-              <a class="level-item" aria-label="like" >
+              <a class="level-item" aria-label="like" href=" {% url 'edit_post' p.id 'edit' %} ">
                 <span class="icon is-small">
-                  <i class="fas fa-thumbs-up " aria-hidden="true"></i>
+                  <i class="fas fa-edit"></i>
                 </span>
               </a>
-              <a class="level-item" aria-label="delete">
+              <a id="showModal" class="level-item" aria-label="delete" href=" {% url 'edit_post' p.id 'delete' %} "  >
                   <span class="icon is-small">
                     <i class="fas fa-trash " aria-hidden="true"></i>
                   </span>
@@ -74,5 +111,6 @@
     {% endfor %}
 
 </center>
+
 
 {% endblock %}

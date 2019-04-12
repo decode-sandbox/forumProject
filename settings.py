@@ -121,6 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-"/home/qadir/repo/decode-sanbox/forumProject/static",
-)
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+

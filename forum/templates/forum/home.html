@@ -24,7 +24,7 @@
 						      </div>
 						      <div class="media-content">
 						        <p class="title is-4">CATEGORIES</p>
-						        <p class="subtitle is-4">18</p>
+						        <p class="subtitle is-4">{{nbCat}}</p>
 						      </div>
 						    </div>
 
@@ -42,7 +42,7 @@
 						      </div>
 						      <div class="media-content">
 						        <p class="title is-4">SUJETS</p>
-						        <p class="subtitle is-4">56</p>
+						        <p class="subtitle is-4">{{nbPost}}</p>
 						      </div>
 						    </div>
 		   				
@@ -60,7 +60,7 @@
 						      </div>
 						      <div class="media-content">
 						        <p class="title is-4">REPONSES</p>
-						        <p class="subtitle is-4">189</p>
+						        <p class="subtitle is-4">{{nbCom}}</p>
 						      </div>
 						    </div>
 		   				
@@ -74,7 +74,7 @@
    <section>
    <div class="container has-text-centered ">
    	<div class="card">
-   	<table class="table is-fullwidth is-striped">
+   	<!-- <table class="table is-fullwidth is-striped">
 	  <thead>
 	    <tr>
 	      <th><abbr title="Position">CATEGORIES</abbr></th>
@@ -85,7 +85,7 @@
 
 	    </tr>
 	  </thead>
-	</table>
+	</table> -->
 
 	</div>
 
@@ -111,8 +111,10 @@
 	  </thead>
 
 	  <tbody>
-	  	{% for p in cat.postes %}
-		    <tr >
+			
+			{% for p in cat.postes %}
+			<a style="display: block" href=" {% url 'poste' %} ">
+		    <tr id="p.id" name="p.title"  >
 		      <td style="width: 45%">
 		      	<div class="media is-vertical-center" style="height: 100px">
 						      <div class="media-left">
@@ -121,17 +123,20 @@
 						        </figure>
 						      </div>
 						      <div class="media-content">
-						        <p class="title is-4"> {{p.title}} </p>
-						        <p class="subtitle is-6"> {{p.description}} </p>
+						        <p class="title is-4"> 	<a style="display: block" href=" {% url 'comment' p.id %} ">
+												{{p.title|truncatewords:15}} </a></p>
+										<p class="subtitle is-6"> {{p.description|truncatewords:10}} </p>
+										
 						      </div>
 						    </div>
 		      </td>
-		      <td>36</td>
+		      <td>{{p.id}} </td>
 		      <td>32</td>
 		      <td> {{p.user}} </td>
 		      <td> {{p.crud_date}} </td>
 		     
-		  	</tr>
+				</tr>
+			</a>
 		{% endfor %}
 
 	</tbody>

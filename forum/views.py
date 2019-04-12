@@ -1,5 +1,5 @@
 from forum.models import Categorie
-from forum.models import Post
+from forum.models import Post, Comment, Like
 
 from forum.models import User
 from django.contrib.auth.models import User as AuthUser
@@ -11,6 +11,8 @@ from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.template.context_processors import csrf
 from django.http import HttpResponse
+from django.core.files.storage import FileSystemStorage
+
 
 
 
@@ -24,6 +26,9 @@ def home(request):
 	}
 	
 	cats = Categorie.objects.all()
+	nbCat=cats.count()+1
+	nbPost=Post.objects.all().count()
+	nbCom=Comment.objects.all().count()
 
 	postes_of_categorie = []
 	categories = []			
@@ -105,15 +110,20 @@ def Poste(request):
 		form_values = request.POST.dict()
 		title = form_values['title']
 		description = form_values["description"]
-		#paylaod = form_values['paylaod']
 
-		#the_user.save()
 		user=User.objects.get(user__username=request.user.username)
-		# return HttpResponse("hi, {0} !".format(user))
-		post = Post.objects.create(title=title, description=description, user=user)
-		post.save()
-		error = ""
-		#return render(request,'forum/cop.html')
+		try:
+			myfile = request.FILES['picture']
+		except KeyError:
+			post = Post.objects.create(title=title, description=description, user=user)
+		else:
+			myfile = request.FILES['picture']
+			fs = FileSystemStorage()
+			filename = fs.save(myfile.name, myfile)
+			uploaded_file_url = fs.url(filename)
+			paylaod=uploaded_file_url
+			post = Post.objects.create(title=title, description=description, user=user, payload=paylaod)
+		
 		return redirect(coP)
 
 	else:
@@ -131,5 +141,137 @@ def coP(request):
 	return render(request,'forum/cop.html',locals())
 
 @login_required(login_url='/forum/login')
-def comment(request):
-        return render(request,'forum/comment.html')
+def comment(request,id):
+	# return HttpResponse("id, {0} !".format(id))
+	post=Post.objects.get(id=id)
+	coms = post.comment_set.all()
+	coms_like=[]
+	post_like = post.like_set.all().count()
+
+	for c in coms:
+		com_like = {
+				'com' : c,
+				'like' : c.like_set.all().count()
+				}
+		coms_like.append(com_like)
+
+	if request.method == "POST":
+		form_values = request.POST.dict()
+		message = form_values["comment"]
+		#paylaod = form_values['paylaod']
+		
+		user=User.objects.get(user__username=request.user.username)
+		# return HttpResponse("hi, {0} !".format(user))
+		comme = Comment.objects.create(message=message,post=post, user=user)
+
+		return redirect(comment,id)
+
+	else:
+		return render(request,'forum/comment.html', locals())
+
+	return render(request,'forum/comment.html', locals())
+
+@login_required(login_url='/forum/login')
+def like(request,post_id,id,typ):
+	#return HttpResponse("id, {0} !".format(id))
+	user=User.objects.get(user__username=request.user.username)
+	if typ == "postt":
+		try:
+			l=Like.objects.get(user=user, poste=Post.objects.get(id=id))
+
+		except Like.DoesNotExist:
+			try:
+				Like.objects.create(poste=Post.objects.get(id=id), user=user)
+			except IntegrityError:
+				return HttpResponse("tyintegrytié")
+			else:
+				redirect(comment,post_id)
+
+		except MultipleObjectsReturned:
+				redirect(comment,post_id)
+		#else:
+			#return HttpResponse("vous avez deja liké ce post")
+			
+
+	elif typ == "commentt":
+		try:
+			l=Like.objects.get(user=user, comment=Comment.objects.get(id=id))
+
+		except Like.DoesNotExist:
+			try:
+				Like.objects.create(comment=Comment.objects.get(id=id), user=user)
+			except IntegrityError:
+				return HttpResponse("tyintegrytié")
+			else:
+				redirect(comment,post_id)
+
+		except MultipleObjectsReturned:
+				redirect(comment,post_id)
+		#else:
+			#return HttpResponse("vous avez deja liké ce commentaire")
+		
+		
+	else:
+		return HttpResponse("type error must be post or comment not .%s.." %(typ))
+	
+	return redirect(comment,post_id)
+
+
+def edit_post(request, id, action):
+	post = Post.objects.get(id=id)
+	if action == "edit":
+		title=post.title
+		description=post.description
+		#form = JournalForm(initial={'title': title})
+
+		if request.method == "POST":
+			form_values = request.POST.dict()
+			title = form_values['title']
+			description = form_values["description"]
+			#paylaod = form_values['paylaod']
+
+			#the_user.save()
+			user=User.objects.get(user__username=request.user.username)
+			# return HttpResponse("hi, {0} !".format(user))
+			post.title=title
+			post.description=description
+			post.save()
+			error = ""
+			#return render(request,'forum/cop.html')
+			return redirect(coP)
+
+		else:
+			return render(request,'forum/edit_post.html', locals())
+
+		return render(request,'forum/edit_post.html', locals())
+
+	elif action == "delete":
+		post.delete()
+		return redirect(coP)
+	else:
+		return HttpResponse("type error must be post or comment not .%s.." %(action))
+
+def edit_comment(request,id_post, id, action):
+	com = Comment.objects.get(id=id)
+	post = Post.objects.get(id=id_post)
+	if action == "edit":
+		message=com.message
+		#form = JournalForm(initial={'title': title})
+
+		if request.method == "POST":
+			form_values = request.POST.dict()
+			nmessage = form_values["comment"]
+			com.message=nmessage
+			com.save()
+
+			return redirect(comment,id_post)
+
+		else:
+			return render(request,'forum/edit_comment.html', locals())
+		return redirect(comment,id_post)
+
+	elif action == "delete":
+		com.delete()
+		return redirect(comment,id_post)
+	else:
+		return HttpResponse("type error must be post or comment not .%s.." %(action))

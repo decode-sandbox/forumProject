@@ -5,40 +5,23 @@
     <div class="hero-body">
       <div class="container">
         <h1 class="title">
-          Poste
+          Edition du poste
         </h1>
       </div>
     </div>
   </section>
-  <div class="tabs is-boxed">
-    <ul>
-      <li class="is-active">
-        <a>
-          <span><i aria-hidden="true"></i></span>
-          <span>Nouveau Poste</span>
-          
-        </a>
-      </li>
-      <li>
-        <a href="coP">
-          <span class="icon is-small"><i class="fas fa-clipboard" aria-hidden="true"></i></span>
-          <span>Mes postes</span>
-        </a>
-      </li>
-    </ul>
-  </div>
-
-<form method="POST" action="" enctype="multipart/form-data">  
+<br><br><br>
+<form method="POST" action="" >  
     {% csrf_token %}
 
 <div class="field is-horizontal">
       <div class="field-label is-medium">
-        <label class="label">Titre du Poste</label>
+        <label class="label">Titre du poste</label>
       </div>
       <div class="field-body">
         <div class="field">
           <div class="control">
-            <input class="input " id="title" name="title" type="text" placeholder="Title of poste" style="width: 500px;">
+            <input class="input " id="title" name="title" type="text" value="{{title}}" placeholder="Title of poste" style="width: 500px;">
           </div>
         </div>
       </div>
@@ -51,7 +34,7 @@
       <div class="field-body" >
         <div class="field">
           <div class="control">
-            <textarea id="description" name="description" class="textarea" placeholder="Contenues" style="height: 300px;"></textarea>
+            <textarea id="description" name="description" class="textarea" placeholder="Contenues" style="height: 300px;">{{description}}</textarea>
           </div>
         </div>
       </div>
@@ -70,22 +53,23 @@
         </div>
       </div>
     </div> -->
-    <input class="" type="file" name="picture">
-    <!-- <div class="file has-name is-centered">
-      <label class="file-label">
-          <input class="file-input" type="file" name="picture">
-          <span class="file-cta">
-            <span class="file-icon">
-              <i class="fas fa-upload"></i>
-            </span>
-            <span class="file-label">
-              Choisissez votre fichier…
-            </span>
-          </span>
-          <span class="file-name"></span>
-      </label>
-    </div> -->
+  
+    <div class="file has-name is-centered">
+  <label class="file-label">
+  <input class="file-input" type="file" name="resume">
+  <span class="file-cta">
+    <span class="file-icon">
+      <i class="fas fa-upload"></i>
+    </span>
+    <span class="file-label">
+      Choississez votre fichier…
+    </span>
+  </span>
+  <span class="file-name">
     
+  </span>
+  </label>
+  </div>
    <br>
     <div class="field is-horizontal">
       <div class="field-label">
@@ -94,18 +78,14 @@
       <div class="field-body">
         <div class="field">
           <div class="control">
-            <button class="button is-dark" type="submit" >
-              Soumettre le poste
+            <button class="button is-dark is-medium" type="submit" >
+              Mettre à jour
             </button>
           </div>
         </div>
       </div>
     </div>
   </form>
-
-  {% if uploaded_file_url %}
-    <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
-  {% endif %}
 
 
 {% endblock %}

@@ -46,16 +46,20 @@ class Comment(models.Model):
 
 	post = models.ForeignKey('Post', null=True, on_delete=models.CASCADE)
 	com = models.ForeignKey('Comment', null=True, on_delete=models.CASCADE)
-
-	def __init__(self):
-		return self.message
+	user = models.ForeignKey('User', on_delete=models.CASCADE)
 
 	class Meta:
 		verbose_name = "un commentaire"
 		ordering = ['crud_date']
 
 	def __str__(self):
-		return self.title
+		return self.message
+
+# class Commentaire(models.Model):
+# 	"""docstring for Categorie"""
+# 	message = models.CharField(max_length=45)
+# 	def __str__(self):
+# 		return self.message
 
 class Categorie(models.Model):
 	"""docstring for Categorie"""
@@ -67,9 +71,9 @@ class Like(models.Model):
 	"""docstring for Like"""
 	#num = models.IntegerField()
 
-	poste = models.OneToOneField(Post, null=True, on_delete=models.CASCADE)
-	comment = models.OneToOneField(Comment, null=True, on_delete=models.CASCADE)
-	user = models.OneToOneField(User, on_delete=models.CASCADE)
+	poste = models.ForeignKey('Post', null=True, on_delete=models.CASCADE)
+	comment = models.ForeignKey('Comment', null=True, on_delete=models.CASCADE)
+	user = models.ForeignKey('User', on_delete=models.CASCADE)
 
 
 	
