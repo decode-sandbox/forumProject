@@ -11,6 +11,8 @@ from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.template.context_processors import csrf
 from django.http import HttpResponse
+from django.core.files.storage import FileSystemStorage
+
 
 
 
@@ -108,15 +110,20 @@ def Poste(request):
 		form_values = request.POST.dict()
 		title = form_values['title']
 		description = form_values["description"]
-		#paylaod = form_values['paylaod']
 
-		#the_user.save()
 		user=User.objects.get(user__username=request.user.username)
-		# return HttpResponse("hi, {0} !".format(user))
-		post = Post.objects.create(title=title, description=description, user=user)
-		post.save()
-		error = ""
-		#return render(request,'forum/cop.html')
+		try:
+			myfile = request.FILES['picture']
+		except KeyError:
+			post = Post.objects.create(title=title, description=description, user=user)
+		else:
+			myfile = request.FILES['picture']
+			fs = FileSystemStorage()
+			filename = fs.save(myfile.name, myfile)
+			uploaded_file_url = fs.url(filename)
+			paylaod=uploaded_file_url
+			post = Post.objects.create(title=title, description=description, user=user, payload=paylaod)
+		
 		return redirect(coP)
 
 	else:
@@ -182,8 +189,8 @@ def like(request,post_id,id,typ):
 
 		except MultipleObjectsReturned:
 				redirect(comment,post_id)
-		else:
-			return HttpResponse("vous avez deja liké ce post")
+		#else:
+			#return HttpResponse("vous avez deja liké ce post")
 			
 
 	elif typ == "commentt":
@@ -200,8 +207,8 @@ def like(request,post_id,id,typ):
 
 		except MultipleObjectsReturned:
 				redirect(comment,post_id)
-		else:
-			return HttpResponse("vous avez deja liké ce commentaire")
+		#else:
+			#return HttpResponse("vous avez deja liké ce commentaire")
 		
 		
 	else:
@@ -237,9 +244,34 @@ def edit_post(request, id, action):
 			return render(request,'forum/edit_post.html', locals())
 
 		return render(request,'forum/edit_post.html', locals())
-		
+
 	elif action == "delete":
 		post.delete()
 		return redirect(coP)
+	else:
+		return HttpResponse("type error must be post or comment not .%s.." %(action))
+
+def edit_comment(request,id_post, id, action):
+	com = Comment.objects.get(id=id)
+	post = Post.objects.get(id=id_post)
+	if action == "edit":
+		message=com.message
+		#form = JournalForm(initial={'title': title})
+
+		if request.method == "POST":
+			form_values = request.POST.dict()
+			nmessage = form_values["comment"]
+			com.message=nmessage
+			com.save()
+
+			return redirect(comment,id_post)
+
+		else:
+			return render(request,'forum/edit_comment.html', locals())
+		return redirect(comment,id_post)
+
+	elif action == "delete":
+		com.delete()
+		return redirect(comment,id_post)
 	else:
 		return HttpResponse("type error must be post or comment not .%s.." %(action))

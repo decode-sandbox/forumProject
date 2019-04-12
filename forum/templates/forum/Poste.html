@@ -70,23 +70,22 @@
         </div>
       </div>
     </div> -->
-  
-    <div class="file has-name is-centered">
-  <label class="file-label">
-  <input class="file-input" type="file" name="resume">
-  <span class="file-cta">
-    <span class="file-icon">
-      <i class="fas fa-upload"></i>
-    </span>
-    <span class="file-label">
-      Choississez votre fichier…
-    </span>
-  </span>
-  <span class="file-name">
+    <input class="" type="file" name="picture">
+    <!-- <div class="file has-name is-centered">
+      <label class="file-label">
+          <input class="file-input" type="file" name="picture">
+          <span class="file-cta">
+            <span class="file-icon">
+              <i class="fas fa-upload"></i>
+            </span>
+            <span class="file-label">
+              Choisissez votre fichier…
+            </span>
+          </span>
+          <span class="file-name"></span>
+      </label>
+    </div> -->
     
-  </span>
-  </label>
-  </div>
    <br>
     <div class="field is-horizontal">
       <div class="field-label">
@@ -103,6 +102,10 @@
       </div>
     </div>
   </form>
+
+  {% if uploaded_file_url %}
+    <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+  {% endif %}
 
 
 {% endblock %}

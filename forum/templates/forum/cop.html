@@ -98,7 +98,7 @@ $(".modal-close").click(function() {
                   <i class="fas fa-edit"></i>
                 </span>
               </a>
-              <a id="showModal" class="level-item" aria-label="delete" onclick='document.getElementById("modal").classList.add("is-active"); '  >
+              <a id="showModal" class="level-item" aria-label="delete" href=" {% url 'edit_post' p.id 'delete' %} "  >
                   <span class="icon is-small">
                     <i class="fas fa-trash " aria-hidden="true"></i>
                   </span>
