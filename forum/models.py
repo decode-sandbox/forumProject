@@ -53,7 +53,6 @@ class Comment(models.Model):
 		ordering = ['crud_date']
 
 	def __str__(self):
-
 		return self.message
 		
  

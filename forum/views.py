@@ -302,3 +302,4 @@ def Logout(request):
 	logout(request)
 	return redirect(home)
 
+
