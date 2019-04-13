@@ -2,11 +2,19 @@
 {% block title %} Faire un commentaire {% endblock %}
 {% block content %}
 
+{% block banner %}
+{% endblock %}
+
         <article class="media ">
               
                 <figure class="media-left">
                   <p class="image is-64x64">
-                    <img src="https://bulma.io/images/placeholders/128x128.png">
+                    
+                    {% if post.user.photo %}
+                        <img src=" {{post.user.photo}} ">  
+                    {% else %}    
+                        <img src="https://img.icons8.com/cotton/64/000000/gender-neutral-user.png"">             
+                    {% endif %}
                     <strong> @{{post.user}} </strong>
                   </p>
                 </figure>
@@ -16,7 +24,7 @@
                      
                       <h1> {{post.title}} </h1>
                       {% if post.payload %}
-                        <img src=" {{post.payload}} ">                      
+                        <img src=" {{post.payload}} " style="height: 500px;">                      
                       {% endif %}
                       
                       <br>
@@ -30,7 +38,11 @@
                   <article class="media" >
                     <figure class="media-left">
                       <p class="image is-48x48">
-                        <img src="https://bulma.io/images/placeholders/96x96.png">
+                        {% if com.com.user.photo %}
+                        <img src=" {{com.com.user.photo}} ">  
+                    {% else %}    
+                        <img src="https://img.icons8.com/cotton/64/000000/gender-neutral-user.png"">             
+                    {% endif %}
                       </p>
                     </figure>
                     <div class="media-content">
@@ -40,6 +52,7 @@
                           <br>{{com.com.message}}
                           <br>
                           <small><a href=" {% url 'like' post.id com.com.id 'commentt'%} " > {{com.like}} Like</a> · <a>Reply</a> · 2 hrs</small>
+                          {% if com.by_me %}
                           <span class="level-left">
                             <a class="level-item" aria-label="like" href=" {% url 'edit_comment' post.id com.com.id 'edit' %} ">
                                 <span class="icon is-small">
@@ -52,6 +65,7 @@
                                   </span>
                                 </a>
                               </span>
+                            {% endif %}
                         </p>
                       </div>
                     </div>
@@ -66,7 +80,11 @@
                 <article class="media">
                   <figure class="media-left">
                     <p class="image is-64x64">
-                      <img src="https://bulma.io/images/placeholders/128x128.png">
+                      {% if user.photo %}
+                      <img src=" {{post.user.photo}} ">  
+                  {% else %}    
+                      <img src="https://img.icons8.com/cotton/64/000000/gender-neutral-user.png"">             
+                  {% endif %}
                     </p>
                   </figure>
                   <div class="media-content">

@@ -11,30 +11,30 @@
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
 <body>
-  <div class="hero is-fullwidth ">
+  <div class="box ">
     <div class="columns">
       <div class="column is-4 is-offset-4">
       <h3 class="title has-text-black-bis">Créer un compte</h3>
-        <form method="post" action="" >
+        <form method="post" action="" enctype="multipart/form-data">
           {% csrf_token %}
           <div class="field">
           <!-- <label class="label is-large">Nom</label> -->
           <div class="control">
-            <input class="input is-large" type="text" placeholder="Entrez votre nom" name="name">
+            <input class="input is-medium" type="text" placeholder="Entrez votre nom" name="name">
           </div>
         </div>
 
         <div class="field">
           <!-- <label class="label is-large ">Prénoms</label> -->
           <div class="control">
-            <input class="input is-large" type="text" placeholder="Entrez vos prénoms" name="names">
+            <input class="input is-medium" type="text" placeholder="Entrez vos prénoms" name="names">
           </div>
         </div>
 
         <div class="field">
           <!-- <label class="label is-large">Pseudo</label> -->
           <div class="control has-icons-left has-icons-right">
-            <input class="input  is-large" type="text" placeholder="Votre pseudo" value="" name="username">
+            <input class="input  is-medium" type="text" placeholder="Votre pseudo" value="" name="username">
             <span class="icon is-small is-left">
               <i class="fas fa-user"></i>
             </span>
@@ -48,7 +48,7 @@
         <div class="field">
           <!-- <label class="label is-large">Email</label> -->
           <div class="control has-icons-left has-icons-right">
-            <input class="input  is-large" type="email" placeholder="Entrer votre mail" value="" name="email"> 
+            <input class="input  is-medium" type="email" placeholder="Entrer votre mail" value="" name="email"> 
             <span class="icon is-small is-left">
               <i class="fas fa-envelope"></i>
             </span>
@@ -61,7 +61,7 @@
 
         <div class="field">
           <p class="control has-icons-left">
-            <input class="input is-large" type="password" placeholder="Mot de passe" name="paswrd">
+            <input class="input is-medium" type="password" placeholder="Mot de passe" name="paswrd">
             <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
             </span>
@@ -70,7 +70,7 @@
 
       <div class="field">
           <p class="control has-icons-left">
-            <input class="input is-large" type="password" placeholder=" Confirmer mot de passe " name="confirm_paswrd">
+            <input class="input is-medium" type="password" placeholder=" Confirmer mot de passe " name="confirm_paswrd">
             <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
             </span>
@@ -82,19 +82,20 @@
         <br>
         {% endif %}
 
-        <div class="file">
+        <div class="file has-name " style="margin-bottom: 15px;">
             <label class="file-label">
-              <input class="file-input" type="file" name="resume">
-              <span class="file-cta">
+                <input class="file-input" type="file" name="resume">
+                <span class="file-cta">
                   <span class="file-icon">
                     <i class="fas fa-upload"></i>
                   </span>
                   <span class="file-label">
-                    Choisir photo
+                    Photo de profil
                   </span>
-              </span>
+                </span>
+                <span class="file-name">  </span>
             </label>
-        </div>
+          </div>
 
 
         <div class="control">

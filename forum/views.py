@@ -57,7 +57,7 @@ def home(request):
 	return render(request,'forum/home.html', locals())
 
 def home1(request):
-	return render(request,'forum/home1.html')
+	return render(request,'forum/')
 
 def login(request):
 	if request.method == "POST":
@@ -85,8 +85,21 @@ def register(request):
 		username = form_values['username']
 		paswrd = form_values['paswrd']
 		confirm_paswrd = form_values['confirm_paswrd']
-		profil = form_values['resume']
 		error = "Password don't match!"
+		photo="https://img.icons8.com/cotton/64/000000/gender-neutral-user.png"
+		try:
+			myfile = request.FILES['resume']
+		except KeyError:
+			print("key error")
+		else:
+			print("no key error")
+			myfile = request.FILES['resume']
+			fs = FileSystemStorage()
+			filename = fs.save(myfile.name, myfile)
+			uploaded_file_url = fs.url(filename)
+			print(uploaded_file_url)
+			photo=uploaded_file_url
+
 		if paswrd == confirm_paswrd:
 			try:
 				user = AuthUser.objects.create_user(username=username,email=email,password=paswrd,first_name=names,last_name=name)
@@ -94,7 +107,7 @@ def register(request):
 			except IntegrityError:
 				error = f"Username{username} already exist"
 			else:
-				User(user=user).save()
+				User(user=user, photo=photo).save()
 				new_login(request,user)
 				return redirect(home1)
 		return render(request, 'forum/register.html',{"error" : error} )
@@ -150,11 +163,13 @@ def comment(request,id):
 	coms = post.comment_set.all()
 	coms_like=[]
 	post_like = post.like_set.all().count()
-
+	user=User.objects.get(user__username=request.user.username)
 	for c in coms:
+		 
 		com_like = {
 				'com' : c,
-				'like' : c.like_set.all().count()
+				'like' : c.like_set.all().count(),
+				'by_me': user==c.user
 				}
 		coms_like.append(com_like)
 
@@ -163,7 +178,7 @@ def comment(request,id):
 		message = form_values["comment"]
 		#paylaod = form_values['paylaod']
 		
-		user=User.objects.get(user__username=request.user.username)
+		
 		# return HttpResponse("hi, {0} !".format(user))
 		comme = Comment.objects.create(message=message,post=post, user=user)
 
@@ -188,12 +203,15 @@ def like(request,post_id,id,typ):
 			except IntegrityError:
 				return HttpResponse("tyintegrytié")
 			else:
+				print("deja like")
 				redirect(comment,post_id)
 
 		except MultipleObjectsReturned:
 				redirect(comment,post_id)
-		#else:
-			#return HttpResponse("vous avez deja liké ce post")
+		else:
+			l.delete()
+			redirect(comment,post_id)
+			# return HttpResponse("vous avez deja liké ce post")
 			
 
 	elif typ == "commentt":
@@ -204,14 +222,19 @@ def like(request,post_id,id,typ):
 			try:
 				Like.objects.create(comment=Comment.objects.get(id=id), user=user)
 			except IntegrityError:
+				
 				return HttpResponse("tyintegrytié")
 			else:
+				
 				redirect(comment,post_id)
 
 		except MultipleObjectsReturned:
+				
 				redirect(comment,post_id)
-		#else:
-			#return HttpResponse("vous avez deja liké ce commentaire")
+		else:
+			l.delete()
+			redirect(comment,post_id)
+			# return HttpResponse("vous avez deja liké ce commentaire")
 		
 		
 	else:
