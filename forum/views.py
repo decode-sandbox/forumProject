@@ -300,5 +300,5 @@ def post_with_more_upvote(request,page=1):
 
 def Logout(request):
 	logout(request)
-	return redirect(login)
+	return redirect(home)
 
