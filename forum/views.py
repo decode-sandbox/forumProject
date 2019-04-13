@@ -56,9 +56,6 @@ def home(request):
 
 	return render(request,'forum/home.html', locals())
 
-def home1(request):
-	return render(request,'forum/')
-
 def login(request):
 	if request.method == "POST":
 		form_fields = request.POST.dict()

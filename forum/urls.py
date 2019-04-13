@@ -31,7 +31,6 @@ urlpatterns = [
     path('like/<post_id>/<id>/<typ>',views.like,name='like'),
     path('posts',views.post_with_more_upvote,name='posts'),
     path('comment',views.comment,name='comment'),
-    # path('home1',views.home1,name='home1'),
     path('logout',views.Logout,name='logout'),
 ]
 
