@@ -286,6 +286,7 @@ def post_with_more_upvote(request,page=1):
 		liste.append(posts)
 		#ya = QuerySet [<Like: Like object (2)>]
 	p = Paginator(liste,10)
+	yi = p.num_pages
 	try:
 		pos = p.page(page)
 	except EmptyPage:

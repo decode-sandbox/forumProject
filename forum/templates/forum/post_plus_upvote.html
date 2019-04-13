@@ -55,7 +55,7 @@
                    class="column button is-link">Précédent</a>
                 {% endif %}
                 <span class="column current">
-                   <strong>Page {{ pos.number }} / {{ pos.num_pages }}</strong>
+                   <strong>Page {{ pos.number }} / {{ p.num_pages }}</strong>
                 </span>
                 {% if pos.has_next %}
                    <a href="{% url 'posts' pos.next_page_number %}"
@@ -69,6 +69,4 @@
 </div>
 
 </section>
-
-
 {% endblock %}
