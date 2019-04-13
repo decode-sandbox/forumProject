@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %} Accueil {% endblock %}
+{% block style %}
+	 <style type="text/css">
+    .is-vertical-center {
+        display: flex;
+        align-items: center;
+      }
+  </style>
+{% endblock %}
+
+{% block content %}
+
+   
+   <br><br>
+   <section>
+   <div class="container has-text-centered ">
+
+	<br><br>
+
+		
+	  <tbody>
+			
+			{% for elmt in pos %}
+			<a style="display: block" href=" {% url 'poste' %} ">
+		    <tr id="p.id" name="p.title"  >
+		      <td style="width: 45%">
+		      	<div class="media is-vertical-center" style="height: 100px">
+						      <div class="media-left">
+						        <figure class="image is-48x48">
+						          <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+						        </figure>
+						      </div>
+						      <div class="media-content">
+												{{elmt|truncatewords:15}} </a></p>
+										
+						      </div>
+						    </div>
+		      </td>
+		     
+				</tr>
+			</a>
+		{% endfor %}
+
+	</tbody>
+
+  </table>
+ 
+<div class="columns">
+        <div class="column"></div>
+        <div class="column">
+            <div class="columns">
+                {% if pos.has_previous %}
+                   <a href="{% url 'posts' products.previous_page_number %}"
+                   class="column button is-link">Précédent</a>
+                {% endif %}
+                <span class="column current">
+                   <strong>Page {{ pos.number }} / {{ p.num_pages }}</strong>
+                </span>
+                {% if pos.has_next %}
+                   <a href="{% url 'posts' pos.next_page_number %}"
+                   class="column button is-link">Suivant</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="column"></div>
+    </div>
+
+</div>
+
+</section>
+{% endblock %}

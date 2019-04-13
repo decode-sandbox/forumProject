@@ -1,7 +1,4 @@
-from forum.models import Categorie
-from forum.models import Post, Comment, Like
-
-from forum.models import User
+from forum.models import User, Post, Comment, Like,Categorie
 from django.contrib.auth.models import User as AuthUser
 from django.shortcuts import render, redirect
 # from django.core.paginator import Paginator
@@ -12,6 +9,7 @@ from django.db import IntegrityError
 from django.template.context_processors import csrf
 from django.http import HttpResponse
 from django.core.files.storage import FileSystemStorage
+from django.core.paginator import Paginator,EmptyPage	
 
 
 
@@ -89,6 +87,7 @@ def register(request):
 		if paswrd == confirm_paswrd:
 			try:
 				user = AuthUser.objects.create_user(username=username,email=email,password=paswrd,first_name=names,last_name=name)
+				# user=User(username,first_name="names",last_name="name",email="email",password="paswrd")
 			except IntegrityError:
 				error = f"Username{username} already exist"
 			else:
@@ -100,6 +99,7 @@ def register(request):
 		return render(request, 'forum/register.html')
 
 	return render(request,'forum/register.html')
+	
 def postesOfCategorie(request, catID):
 	return render('categories.html')
 
@@ -275,3 +275,22 @@ def edit_comment(request,id_post, id, action):
 		return redirect(comment,id_post)
 	else:
 		return HttpResponse("type error must be post or comment not .%s.." %(action))
+
+def post_with_more_upvote(request,page=1):
+	my_dict={}
+	liste = []
+	
+	for posts in Post.objects.all():
+		yo = Like.objects.filter(poste__title=posts.title)
+		my_dict[posts] = yo
+		liste.append(posts)
+		#ya = QuerySet [<Like: Like object (2)>]
+	p = Paginator(liste,10)
+	yi = p.num_pages
+	try:
+		pos = p.page(page)
+	except EmptyPage:
+		pos = p.page(paginator.num_pages)
+
+
+	return render(request,'forum/post_plus_upvote.html',locals())

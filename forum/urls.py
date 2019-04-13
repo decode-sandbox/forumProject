@@ -19,7 +19,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('',views.home),
+    path('',views.home), 
     path('login',views.login,name='login'),
     path('register',views.register,name='register'),
     path('Poste',views.Poste,name='poste'),
@@ -28,5 +28,6 @@ urlpatterns = [
     path('edit_comment/<id_post>/<id>/<action>',views.edit_comment,name='edit_comment'),
     path('comment/<id>',views.comment,name='comment'),
     path('like/<post_id>/<id>/<typ>',views.like,name='like'),
+    path('posts',views.post_with_more_upvote,name='posts'),
 ]
 
