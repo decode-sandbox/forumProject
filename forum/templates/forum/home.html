@@ -19,7 +19,7 @@
 		   				 <div class="media">
 						      <div class="media-left">
 						        <figure class="image is-48x48">
-						          <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+						          <img src="https://img.icons8.com/ultraviolet/50/000000/category.png" alt="Placeholder image">
 						        </figure>
 						      </div>
 						      <div class="media-content">
@@ -37,8 +37,7 @@
 		   				 <div class="media">
 						      <div class="media-left">
 						        <figure class="image is-48x48">
-						          <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-						        </figure>
+											<img src="https://img.icons8.com/flat_round/64/000000/bookmark.png">						        </figure>
 						      </div>
 						      <div class="media-content">
 						        <p class="title is-4">SUJETS</p>
@@ -55,8 +54,7 @@
 		   				 <div class="media">
 						      <div class="media-left">
 						        <figure class="image is-48x48">
-						          <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-						        </figure>
+											<img src="https://img.icons8.com/flat_round/64/000000/speech-bubble.png">						        </figure>
 						      </div>
 						      <div class="media-content">
 						        <p class="title is-4">REPONSES</p>
@@ -102,8 +100,7 @@
 		      	<abbr title="Position"> {{cat.label}} </abbr>
 		      	<a style="margin-left: 15px" class="button is-primary is-rounded is-outlined is-inverted" > <span class="icon" ><i class="" > + </i></span> </a>
 		      </th>
-		      <th><abbr title="nbPoste">36</abbr></th>
-		      <th><abbr title="nbComment">32</abbr></th>
+		      <!-- <th><abbr title="nbComment">Réponses</abbr></th> -->
 		      <th><abbr title="date">Auteur</abbr></th>
 		      <th><abbr title="nbComment">Date</abbr></th>
 
@@ -115,23 +112,26 @@
 			{% for p in cat.postes %}
 			<a style="display: block" href=" {% url 'poste' %} ">
 		    <tr id="p.id" name="p.title"  >
-		      <td style="width: 45%">
+		      <td style="width: 55%">
 		      	<div class="media is-vertical-center" style="height: 100px">
 						      <div class="media-left">
-						        <figure class="image is-48x48">
-						          <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+						        <figure class="image is-96x96">
+											{% if p.payload %}
+                        <img src="{{p.payload}}">  
+                    {% else %}    
+												<img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                    {% endif %}
 						        </figure>
 						      </div>
 						      <div class="media-content">
-						        <p class="title is-4"> 	<a style="display: block" href=" {% url 'comment' p.id %} ">
+						        <p class="title is-5"> 	<a style="display: block" href=" {% url 'comment' p.id %} ">
 												{{p.title|truncatewords:15}} </a></p>
 										<p class="subtitle is-6"> {{p.description|truncatewords:10}} </p>
 										
 						      </div>
 						    </div>
 		      </td>
-		      <td>{{p.id}} </td>
-		      <td>32</td>
+		      <!-- <td>{{p.id}} </td> -->
 		      <td> {{p.user}} </td>
 		      <td> {{p.crud_date}} </td>
 		     

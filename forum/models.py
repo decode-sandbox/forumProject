@@ -13,7 +13,7 @@ class User(models.Model):
 	# login = models.CharField(max_length=45)
 	# passwd = models.CharField(max_length=45)
 	# inscription_date = models.DateTimeField(default=timezone.now,verbose_name="Date d'inscription")
-	photo = models.ImageField(max_length=200, null=True)
+	photo = models.CharField(max_length=200, null=True)
 	
 	def __str__(self):
 		return self.user.username
