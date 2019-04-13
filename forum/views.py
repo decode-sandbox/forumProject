@@ -109,7 +109,7 @@ def register(request):
 			else:
 				User(user=user, photo=photo).save()
 				new_login(request,user)
-				return redirect(home1)
+				return redirect(home)
 		return render(request, 'forum/register.html',{"error" : error} )
 	else:
 		return render(request, 'forum/register.html')
